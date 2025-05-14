@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebcamRips Session Recovery</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #1f2937;
+      color: white;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .container {
+      background-color: #111827;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      max-width: 90%;
+      width: 500px;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+    .spinner {
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 3px solid #f56565;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .status {
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 0.25rem;
+      background-color: #374151;
+    }
+    .button {
+      background-color: #ef4444;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.25rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+    .button:hover {
+      background-color: #dc2626;
+    }
+    .success-icon {
+      color: #34d399;
+      font-size: 3rem;
+      margin: 1rem 0;
+    }
+    pre {
+      text-align: left;
+      background: #111111;
+      padding: 10px;
+      border-radius: 4px;
+      max-height: 150px;
+      overflow: auto;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Session Recovery</h1>
+    
+    <div id="cleaning" class="status">
+      <div class="spinner"></div>
+      <p>Cleaning up session data...</p>
+      <p style="font-size: 0.85rem; opacity: 0.7;">This will fix login issues.</p>
+    </div>
+    
+    <div id="success" class="status hidden">
+      <div class="success-icon">✓</div>
+      <h2>Session Cleanup Complete</h2>
+      <p>You should now be able to log in without issues.</p>
+      <a href="/login" class="button">Go to Login</a>
+    </div>
+    
+    <div id="error" class="status hidden">
+      <h2>Recovery Failed</h2>
+      <p>Please try again or contact support if the issue persists.</p>
+      <button id="retry-button" class="button">Try Again</button>
+      <div id="error-details" class="hidden">
+        <p>Error details:</p>
+        <pre id="error-log"></pre>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to clear all cookies
+    function clearAllCookies() {
+      const cookies = document.cookie.split(';');
+      
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf('=');
+        const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+        
+        // Delete the cookie with various domain/path combinations to ensure removal
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=' + window.location.hostname;
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=.' + window.location.hostname;
+      }
+      
+      console.log('All cookies cleared');
+      return cookies.length;
+    }
+    
+    // Function to clear localStorage and sessionStorage
+    function clearStorage() {
+      try {
+        const localStorageItems = Object.keys(localStorage).length;
+        const sessionStorageItems = Object.keys(sessionStorage).length;
+        
+        localStorage.clear();
+        sessionStorage.clear();
+        
+        console.log(`Cleared ${localStorageItems} localStorage items and ${sessionStorageItems} sessionStorage items`);
+        return true;
+      } catch (error) {
+        console.error('Error clearing storage:', error);
+        return false;
+      }
+    }
+    
+    // Function to call the server API to clear server-side cookies
+    async function clearServerSessions() {
+      try {
+        const response = await fetch('/api/auth/clear-sessions', {
+          method: 'GET',
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error(`Server responded with status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('Server response:', data);
+        return true;
+      } catch (error) {
+        console.error('Error calling server API:', error);
+        return false;
+      }
+    }
+    
+    // Main function to execute all cleanup
+    async function performCleanup() {
+      try {
+        // Show cleaning UI
+        document.getElementById('cleaning').classList.remove('hidden');
+        document.getElementById('success').classList.add('hidden');
+        document.getElementById('error').classList.add('hidden');
+        
+        // Clear client-side cookies and storage
+        const cookiesCleared = clearAllCookies();
+        const storageCleared = clearStorage();
+        
+        // Try to clear server-side sessions
+        const serverCleared = await clearServerSessions();
+        
+        // Log results
+        console.log('Cleanup completed:', {
+          cookiesCleared,
+          storageCleared,
+          serverCleared
+        });
+        
+        // Show success UI
+        document.getElementById('cleaning').classList.add('hidden');
+        document.getElementById('success').classList.remove('hidden');
+        
+        return true;
+      } catch (error) {
+        console.error('Cleanup failed:', error);
+        
+        // Show error UI
+        document.getElementById('cleaning').classList.add('hidden');
+        document.getElementById('error').classList.remove('hidden');
+        document.getElementById('error-details').classList.remove('hidden');
+        document.getElementById('error-log').textContent = error.toString();
+        
+        return false;
+      }
+    }
+    
+    // Setup retry button
+    document.getElementById('retry-button').addEventListener('click', performCleanup);
+    
+    // Run cleanup on load
+    window.addEventListener('load', performCleanup);
+  </script>
+</body>
+</html> 
