@@ -6,7 +6,7 @@ async function testAdultPlaywright() {
   logger.info('Starting Adult PlaywrightHandler test...');
   
   const options = {
-    headless: false, // Set to true for production
+    headless: true, // Set to true for production
     screenshots: true,
     screenshotsDir: path.join(process.cwd(), 'recordings', 'test-screenshots')
   };

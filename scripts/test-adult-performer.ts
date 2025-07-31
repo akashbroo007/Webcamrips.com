@@ -10,7 +10,7 @@ async function testAdultPerformer() {
   logger.info('Starting Adult Performer Test...');
   
   const options = {
-    headless: false, // Set to false for debugging, true for production
+    headless: true, // Set to false for debugging, true for production
     screenshots: true,
     screenshotsDir: path.join(process.cwd(), 'recordings', 'test-screenshots'),
     timeout: 60000 // Longer timeout for adult sites

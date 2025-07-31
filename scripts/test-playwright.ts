@@ -6,7 +6,7 @@ async function testPlaywright() {
   logger.info('Starting PlaywrightHandler test...');
   
   const options = {
-    headless: false,
+    headless: true,
     screenshots: true,
     screenshotsDir: path.join(process.cwd(), 'recordings', 'test-screenshots')
   };

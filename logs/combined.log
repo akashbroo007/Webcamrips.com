@@ -551,3 +551,128 @@ Test Summary:
 2025-05-06 08:05:44 [app] info: Connected to MongoDB
 2025-05-06 08:33:10 [app] info: Connected to MongoDB
 2025-05-06 23:31:05 [app] info: Connected to MongoDB
+2025-07-31 08:33:23 [app] info: Starting PlaywrightHandler test...
+2025-07-31 08:33:23 [app] info: Initializing browser...
+2025-07-31 08:33:24 [app] warn: Failed to launch Firefox, falling back to Chromium
+2025-07-31 08:33:24 [app] error: Failed to initialize browser
+2025-07-31 08:33:27 [app] info: Starting Adult PlaywrightHandler test...
+2025-07-31 08:33:27 [app] info: Initializing browser...
+2025-07-31 08:33:27 [app] warn: Failed to launch Firefox, falling back to Chromium
+2025-07-31 08:33:27 [app] error: Failed to initialize browser
+2025-07-31 08:33:31 [app] info: Starting Adult Performer Test...
+2025-07-31 08:33:31 [app] info: Initializing browser...
+2025-07-31 08:33:31 [app] warn: Failed to launch Firefox, falling back to Chromium
+2025-07-31 08:33:31 [app] error: Failed to initialize browser
+2025-07-31 08:33:34 [app] info: Generating test report...
+2025-07-31 08:33:34 [app] info: Test report generated: /app/reports/test-report.html
+2025-07-31 08:35:03 [app] info: Starting PlaywrightHandler test...
+2025-07-31 08:35:03 [app] info: Initializing browser...
+2025-07-31 08:35:04 [app] warn: Failed to launch Firefox, falling back to Chromium
+2025-07-31 08:35:08 [app] error: Failed to initialize browser
+2025-07-31 08:35:11 [app] info: Starting Adult PlaywrightHandler test...
+2025-07-31 08:35:11 [app] info: Initializing browser...
+2025-07-31 08:35:11 [app] warn: Failed to launch Firefox, falling back to Chromium
+2025-07-31 08:35:12 [app] error: Failed to initialize browser
+2025-07-31 08:35:15 [app] info: Starting Adult Performer Test...
+2025-07-31 08:35:15 [app] info: Initializing browser...
+2025-07-31 08:35:15 [app] warn: Failed to launch Firefox, falling back to Chromium
+2025-07-31 08:35:16 [app] error: Failed to initialize browser
+2025-07-31 08:35:18 [app] info: Generating test report...
+2025-07-31 08:35:18 [app] info: Test report generated: /app/reports/test-report.html
+2025-07-31 08:36:15 [app] info: Starting PlaywrightHandler test...
+2025-07-31 08:36:15 [app] info: Initializing browser...
+2025-07-31 08:36:18 [app] info: Browser initialized successfully
+2025-07-31 08:36:18 [app] info: Navigating to Google...
+2025-07-31 08:36:18 [app] info: Navigating to https://www.google.com
+2025-07-31 08:36:18 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “'report-sample'” within script-src: ‘strict-dynamic’ specified" {file: "https://www.google.com/" line: 0}]
+2025-07-31 08:36:18 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: ‘strict-dynamic’ specified" {file: "https://www.google.com/" line: 0}]
+2025-07-31 08:36:18 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “https:” within script-src: ‘strict-dynamic’ specified" {file: "https://www.google.com/" line: 0}]
+2025-07-31 08:36:18 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “http:” within script-src: ‘strict-dynamic’ specified" {file: "https://www.google.com/" line: 0}]
+2025-07-31 08:36:18 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: nonce-source or hash-source specified" {file: "https://www.google.com/" line: 0}]
+2025-07-31 08:36:18 [app] debug: Browser console error: [JavaScript Error: "Content-Security-Policy: (Report-Only policy) The page’s settings would block an event handler (script-src-attr) from being executed because it violates the following directive: “script-src 'nonce-SCPO9e6EQ9NSkN0PW5MhoQ' 'strict-dynamic' 'report-sample' 'unsafe-eval' 'unsafe-inline' https: http:”
+Source: _rtf(this)" {file: "https://www.google.com/" line: 0}]
+2025-07-31 08:36:18 [app] debug: Browser console warning: [JavaScript Warning: "Empty string passed to getElementById()." {file: "https://www.google.com/" line: 17}]
+2025-07-31 08:36:18 [app] debug: Browser console warning: [JavaScript Warning: "A resource is blocked by OpaqueResponseBlocking, please check browser console for details." {file: "https://csp.withgoogle.com/csp/gws/other-hp" line: 0}]
+2025-07-31 08:36:19 [app] debug: Browser console warning: [JavaScript Warning: "Empty string passed to getElementById()." {file: "https://www.google.com/xjs/_/js/k=xjs.hd.en.0amsIIiWY_M.2018.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAgIAAAAAAEAAIAAAAAAAAAAAAAAiQAQAQAAAAAAAAAAAEAAAAACAAQIAAAIQIgAABgAAAAAAAAAAAAABEAAAAADAAPBn4AQAICABAAAAAAAAAAC4AABCAAACAAAAAAAAAAAAACAAAAAAACAAAAAAAQAAFAAAAAAAAAAAAEAAAAAAAAAAIAAACEAAAAAAAAAAAAAAAAAAAEAPAAAAAAAAAAAAAAAAAAAAgAMAgBAAAAAMUTQAAAAAAAAAdAAIPGBIQQEAAAAAAAAAAAAAAAAAQICCYC4kUBAgAAAAAAAAAAAAAAAAAAAAAACENLHQ/d=1/ed=1/dg=3/br=1/rs=ACT90oFZlGlQA-nBrDYzBA49C4GpAtBUmQ/ee=ALeJi" line: 158}]
+2025-07-31 08:36:25 [app] info: Navigation completed
+2025-07-31 08:36:25 [app] info: Taking screenshot...
+2025-07-31 08:36:25 [app] info: Screenshot saved to /app/recordings/test-screenshots/test-screenshot-1753950985042.png
+2025-07-31 08:36:28 [app] info: Starting Adult PlaywrightHandler test...
+2025-07-31 08:36:28 [app] info: Initializing browser...
+2025-07-31 08:36:30 [app] info: Browser initialized successfully
+2025-07-31 08:36:30 [app] info: Navigating to https://www.cht.xxx...
+2025-07-31 08:36:30 [app] info: Navigating to https://www.cht.xxx
+2025-07-31 08:36:31 [app] debug: Browser console warning: Hls.js is not supported in this browser!
+2025-07-31 08:36:32 [app] debug: Browser console warning: [JavaScript Warning: "Media resource https://web.static.mmcdn.com/videos/canAutoplayInline.mp4 could not be decoded." {file: "https://www.cht.xxx/" line: 0}]
+2025-07-31 08:36:33 [app] debug: Browser console warning: [JavaScript Warning: "downloadable font: Glyph bbox was incorrect (glyph ids 216 219) (font-family: "UbuntuMedium" style:normal weight:400 stretch:100 src index:1) source: https://web.static.mmcdn.com/fonts/ubuntum-webfont.woff?a7fc63c36394"]
+2025-07-31 08:36:33 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “'report-sample'” within script-src: ‘strict-dynamic’ specified" {file: "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LdpEXsUAAAAAMkkjaaqylB3rEhR7oPZmLjSjaps&co=aHR0cHM6Ly93d3cuY2h0Lnh4eDo0NDM.&hl=en&v=DBIsSQ0s2djD_akThoRUDeHa&size=invisible&anchor-ms=20000&execute-ms=15000&cb=o6im3va8umtw" line: 0}]
+2025-07-31 08:36:33 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: ‘strict-dynamic’ specified" {file: "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LdpEXsUAAAAAMkkjaaqylB3rEhR7oPZmLjSjaps&co=aHR0cHM6Ly93d3cuY2h0Lnh4eDo0NDM.&hl=en&v=DBIsSQ0s2djD_akThoRUDeHa&size=invisible&anchor-ms=20000&execute-ms=15000&cb=o6im3va8umtw" line: 0}]
+2025-07-31 08:36:33 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “https:” within script-src: ‘strict-dynamic’ specified" {file: "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LdpEXsUAAAAAMkkjaaqylB3rEhR7oPZmLjSjaps&co=aHR0cHM6Ly93d3cuY2h0Lnh4eDo0NDM.&hl=en&v=DBIsSQ0s2djD_akThoRUDeHa&size=invisible&anchor-ms=20000&execute-ms=15000&cb=o6im3va8umtw" line: 0}]
+2025-07-31 08:36:33 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “http:” within script-src: ‘strict-dynamic’ specified" {file: "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LdpEXsUAAAAAMkkjaaqylB3rEhR7oPZmLjSjaps&co=aHR0cHM6Ly93d3cuY2h0Lnh4eDo0NDM.&hl=en&v=DBIsSQ0s2djD_akThoRUDeHa&size=invisible&anchor-ms=20000&execute-ms=15000&cb=o6im3va8umtw" line: 0}]
+2025-07-31 08:36:33 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: nonce-source or hash-source specified" {file: "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LdpEXsUAAAAAMkkjaaqylB3rEhR7oPZmLjSjaps&co=aHR0cHM6Ly93d3cuY2h0Lnh4eDo0NDM.&hl=en&v=DBIsSQ0s2djD_akThoRUDeHa&size=invisible&anchor-ms=20000&execute-ms=15000&cb=o6im3va8umtw" line: 0}]
+2025-07-31 08:36:34 [app] debug: Browser console warning: [JavaScript Warning: "Media resource https://web.static.mmcdn.com/videos/canAutoplayInline.mp4 could not be decoded." {file: "https://www.cht.xxx/" line: 0}]
+2025-07-31 08:36:34 [app] debug: Browser console warning: [JavaScript Warning: "An AudioContext was prevented from starting automatically. It must be created or resumed after a user gesture on the page." {file: "https://web.static.mmcdn.com/cachebust/5549-prod-425bd6082eca9f25adfc.js" line: 1}]
+2025-07-31 08:36:34 [app] debug: Browser console warning: [JavaScript Warning: "An AudioContext was prevented from starting automatically. It must be created or resumed after a user gesture on the page." {file: "https://web.static.mmcdn.com/cachebust/5549-prod-425bd6082eca9f25adfc.js" line: 1}]
+2025-07-31 08:36:34 [app] debug: Browser console warning: [JavaScript Warning: "Ignoring unsupported entryTypes: longtask." {file: "https://www.gstatic.com/recaptcha/releases/DBIsSQ0s2djD_akThoRUDeHa/recaptcha__en.js" line: 55}]
+2025-07-31 08:36:34 [app] debug: Browser console warning: [JavaScript Warning: "The value of the attribute “expires” for the cookie “_ga_GX0FLQH21P” has been overwritten." {file: "https://www.cht.xxx/" line: 0}]
+2025-07-31 08:36:34 [app] debug: Browser console warning: [JavaScript Warning: "Failed to create WebGL context: WebGL creation failed:
+* WebglAllowWindowsNativeGl:false restricts context creation on this system. ()
+* Exhausted GL driver options. (FEATURE_FAILURE_WEBGL_EXHAUSTED_DRIVERS)" {file: "https://web.static.mmcdn.com/CACHE/js/output.14a236a94bf9.js" line: 1}]
+2025-07-31 08:36:34 [app] debug: Browser console warning: [JavaScript Warning: "Failed to create WebGL context: WebGL creation failed:
+* WebglAllowWindowsNativeGl:false restricts context creation on this system. ()
+* Exhausted GL driver options. (FEATURE_FAILURE_WEBGL_EXHAUSTED_DRIVERS)" {file: "https://web.static.mmcdn.com/CACHE/js/output.14a236a94bf9.js" line: 1}]
+2025-07-31 08:36:34 [app] debug: Browser console warning: [JavaScript Warning: "Failed to create WebGL context: WebGL creation failed:
+* WebglAllowWindowsNativeGl:false restricts context creation on this system. ()
+* Exhausted GL driver options. (FEATURE_FAILURE_WEBGL_EXHAUSTED_DRIVERS)" {file: "https://web.static.mmcdn.com/CACHE/js/output.14a236a94bf9.js" line: 1}]
+2025-07-31 08:36:34 [app] debug: Browser console warning: [JavaScript Warning: "Failed to create WebGL context: WebGL creation failed:
+* WebglAllowWindowsNativeGl:false restricts context creation on this system. ()
+* Exhausted GL driver options. (FEATURE_FAILURE_WEBGL_EXHAUSTED_DRIVERS)" {file: "https://web.static.mmcdn.com/CACHE/js/output.14a236a94bf9.js" line: 1}]
+2025-07-31 08:36:35 [app] debug: Request to cookie/consent URL: https://thumb.live.mmcdn.com/ribw/delorathecookie.jpg?1753950990
+2025-07-31 08:36:40 [app] info: Navigation completed
+2025-07-31 08:36:40 [app] info: Taking screenshot of homepage...
+2025-07-31 08:36:40 [app] info: Screenshot saved to /app/recordings/test-screenshots/adult-site-homepage-1753951000067.png
+2025-07-31 08:36:40 [app] info: Attempting to extract stream URLs...
+2025-07-31 08:36:43 [app] info: Starting Adult Performer Test...
+2025-07-31 08:36:43 [app] info: Initializing browser...
+2025-07-31 08:36:45 [app] info: Browser initialized successfully
+2025-07-31 08:36:45 [app] info: Navigating to performer page: https://www.cht.xxx/cuddlymoana/
+2025-07-31 08:36:45 [app] info: Navigating to https://www.cht.xxx/cuddlymoana/
+2025-07-31 08:36:46 [app] debug: Browser console warning: [JavaScript Warning: "downloadable font: Glyph bbox was incorrect (glyph ids 216 219) (font-family: "UbuntuMedium" style:normal weight:400 stretch:100 src index:1) source: https://web.static.mmcdn.com/fonts/ubuntum-webfont.woff?a7fc63c36394"]
+2025-07-31 08:36:50 [app] debug: Browser console warning: Hls.js is not supported in this browser!
+2025-07-31 08:36:51 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “'report-sample'” within script-src: ‘strict-dynamic’ specified" {file: "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LdpEXsUAAAAAMkkjaaqylB3rEhR7oPZmLjSjaps&co=aHR0cHM6Ly93d3cuY2h0Lnh4eDo0NDM.&hl=en&v=ngcIAHyEnHQZZIKkyKneDTW3&size=invisible&anchor-ms=20000&execute-ms=15000&cb=w1y57hg217tu" line: 0}]
+2025-07-31 08:36:51 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: ‘strict-dynamic’ specified" {file: "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LdpEXsUAAAAAMkkjaaqylB3rEhR7oPZmLjSjaps&co=aHR0cHM6Ly93d3cuY2h0Lnh4eDo0NDM.&hl=en&v=ngcIAHyEnHQZZIKkyKneDTW3&size=invisible&anchor-ms=20000&execute-ms=15000&cb=w1y57hg217tu" line: 0}]
+2025-07-31 08:36:51 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “https:” within script-src: ‘strict-dynamic’ specified" {file: "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LdpEXsUAAAAAMkkjaaqylB3rEhR7oPZmLjSjaps&co=aHR0cHM6Ly93d3cuY2h0Lnh4eDo0NDM.&hl=en&v=ngcIAHyEnHQZZIKkyKneDTW3&size=invisible&anchor-ms=20000&execute-ms=15000&cb=w1y57hg217tu" line: 0}]
+2025-07-31 08:36:51 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “http:” within script-src: ‘strict-dynamic’ specified" {file: "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LdpEXsUAAAAAMkkjaaqylB3rEhR7oPZmLjSjaps&co=aHR0cHM6Ly93d3cuY2h0Lnh4eDo0NDM.&hl=en&v=ngcIAHyEnHQZZIKkyKneDTW3&size=invisible&anchor-ms=20000&execute-ms=15000&cb=w1y57hg217tu" line: 0}]
+2025-07-31 08:36:51 [app] debug: Browser console warning: [JavaScript Warning: "Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: nonce-source or hash-source specified" {file: "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LdpEXsUAAAAAMkkjaaqylB3rEhR7oPZmLjSjaps&co=aHR0cHM6Ly93d3cuY2h0Lnh4eDo0NDM.&hl=en&v=ngcIAHyEnHQZZIKkyKneDTW3&size=invisible&anchor-ms=20000&execute-ms=15000&cb=w1y57hg217tu" line: 0}]
+2025-07-31 08:36:51 [app] debug: Browser console warning: [JavaScript Warning: "Media resource https://web.static.mmcdn.com/videos/canAutoplayInline.mp4 could not be decoded." {file: "https://www.cht.xxx/cuddlymoana/" line: 0}]
+2025-07-31 08:36:51 [app] debug: Browser console warning: [JavaScript Warning: "An AudioContext was prevented from starting automatically. It must be created or resumed after a user gesture on the page." {file: "https://web.static.mmcdn.com/cachebust/5549-prod-425bd6082eca9f25adfc.js" line: 1}]
+2025-07-31 08:36:51 [app] debug: Browser console warning: [JavaScript Warning: "An AudioContext was prevented from starting automatically. It must be created or resumed after a user gesture on the page." {file: "https://web.static.mmcdn.com/cachebust/5549-prod-425bd6082eca9f25adfc.js" line: 1}]
+2025-07-31 08:36:51 [app] debug: Browser console warning: [JavaScript Warning: "The value of the attribute “expires” for the cookie “_ga_GX0FLQH21P” has been overwritten." {file: "https://www.cht.xxx/cuddlymoana/" line: 0}]
+2025-07-31 08:36:51 [app] debug: Browser console warning: [JavaScript Warning: "The value of the attribute “expires” for the cookie “_ga_GX0FLQH21P” has been overwritten." {file: "https://www.cht.xxx/cuddlymoana/" line: 0}]
+2025-07-31 08:36:51 [app] debug: Browser console warning: [JavaScript Warning: "A resource is blocked by OpaqueResponseBlocking, please check browser console for details." {file: "https://jpeg.live.mmcdn.com/stream?room=cuddlymoana&f=0.261756626048841" line: 0}]
+2025-07-31 08:36:51 [app] debug: Browser console warning: [JavaScript Warning: "Ignoring unsupported entryTypes: longtask." {file: "https://www.gstatic.com/recaptcha/releases/ngcIAHyEnHQZZIKkyKneDTW3/recaptcha__en.js" line: 566}]
+2025-07-31 08:36:51 [app] debug: Browser console warning: [JavaScript Warning: "A resource is blocked by OpaqueResponseBlocking, please check browser console for details." {file: "https://jpeg.live.mmcdn.com/stream?room=cuddlymoana&f=0.9078671605124009" line: 0}]
+2025-07-31 08:36:52 [app] debug: Browser console warning: [JavaScript Warning: "Failed to create WebGL context: WebGL creation failed:
+* WebglAllowWindowsNativeGl:false restricts context creation on this system. ()
+* Exhausted GL driver options. (FEATURE_FAILURE_WEBGL_EXHAUSTED_DRIVERS)" {file: "https://web.static.mmcdn.com/CACHE/js/output.14a236a94bf9.js" line: 1}]
+2025-07-31 08:36:52 [app] debug: Browser console warning: [JavaScript Warning: "Failed to create WebGL context: WebGL creation failed:
+* WebglAllowWindowsNativeGl:false restricts context creation on this system. ()
+* Exhausted GL driver options. (FEATURE_FAILURE_WEBGL_EXHAUSTED_DRIVERS)" {file: "https://web.static.mmcdn.com/CACHE/js/output.14a236a94bf9.js" line: 1}]
+2025-07-31 08:36:52 [app] debug: Browser console warning: [JavaScript Warning: "Failed to create WebGL context: WebGL creation failed:
+* WebglAllowWindowsNativeGl:false restricts context creation on this system. ()
+* Exhausted GL driver options. (FEATURE_FAILURE_WEBGL_EXHAUSTED_DRIVERS)" {file: "https://web.static.mmcdn.com/CACHE/js/output.14a236a94bf9.js" line: 1}]
+2025-07-31 08:36:52 [app] debug: Browser console warning: [JavaScript Warning: "Failed to create WebGL context: WebGL creation failed:
+* WebglAllowWindowsNativeGl:false restricts context creation on this system. ()
+* Exhausted GL driver options. (FEATURE_FAILURE_WEBGL_EXHAUSTED_DRIVERS)" {file: "https://web.static.mmcdn.com/CACHE/js/output.14a236a94bf9.js" line: 1}]
+2025-07-31 08:36:52 [app] debug: Browser console warning: [JavaScript Warning: "A resource is blocked by OpaqueResponseBlocking, please check browser console for details." {file: "https://jpeg.live.mmcdn.com/stream?room=cuddlymoana&f=0.8874429080211977" line: 0}]
+2025-07-31 08:36:52 [app] debug: Browser console warning: [JavaScript Warning: "A resource is blocked by OpaqueResponseBlocking, please check browser console for details." {file: "https://jpeg.live.mmcdn.com/stream?room=cuddlymoana&f=0.2198059551397532" line: 0}]
+2025-07-31 08:36:52 [app] debug: Browser console warning: [JavaScript Warning: "A resource is blocked by OpaqueResponseBlocking, please check browser console for details." {file: "https://jpeg.live.mmcdn.com/stream?room=cuddlymoana&f=0.10510875480936333" line: 0}]
+2025-07-31 08:36:52 [app] debug: Browser console warning: [JavaScript Warning: "A resource is blocked by OpaqueResponseBlocking, please check browser console for details." {file: "https://jpeg.live.mmcdn.com/stream?room=cuddlymoana&f=0.8045653982254509" line: 0}]
+2025-07-31 08:36:52 [app] debug: Browser console warning: [JavaScript Warning: "A resource is blocked by OpaqueResponseBlocking, please check browser console for details." {file: "https://jpeg.live.mmcdn.com/stream?room=cuddlymoana&f=0.5382223808368544" line: 0}]
+2025-07-31 08:36:52 [app] debug: Browser console warning: [JavaScript Warning: "A resource is blocked by OpaqueResponseBlocking, please check browser console for details." {file: "https://jpeg.live.mmcdn.com/stream?room=cuddlymoana&f=0.18634877752813406" line: 0}]
+2025-07-31 08:36:57 [app] info: Navigation completed
+2025-07-31 08:36:57 [app] info: Taking screenshot of performer page...
+2025-07-31 08:36:57 [app] info: Screenshot saved to /app/recordings/test-screenshots/performer-page-1753951017002.png
+2025-07-31 08:36:57 [app] info: Missing positive selector: .online-status:has-text("Live")
+2025-07-31 08:36:59 [app] info: Generating test report...
+2025-07-31 08:36:59 [app] info: Test report generated: /app/reports/test-report.html
