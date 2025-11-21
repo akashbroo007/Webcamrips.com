@@ -1,9 +1,0 @@
-{
-  "/page": "app/page.js",
-  "/video/[id]/page": "app/video/[id]/page.js",
-  "/api/check-db-status/route": "app/api/check-db-status/route.js",
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
-  "/api/admin/initialize/route": "app/api/admin/initialize/route.js",
-  "/api/videos/[id]/route": "app/api/videos/[id]/route.js",
-  "/api/videos/related/[id]/route": "app/api/videos/related/[id]/route.js"
-}

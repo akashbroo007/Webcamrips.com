@@ -141,44 +141,19 @@ export const authOptions: NextAuthOptions = {
     newUser: "/register"
   },
   session: {
-    // Switch to database session strategy to avoid large cookies entirely
-    strategy: "database",
-    maxAge: 24 * 60 * 60, // 1 day (reduced from 7 days)
-  },
-  jwt: {
-    // Further reduced max age for security and size optimization
-    maxAge: 24 * 60 * 60, // 1 day (reduced from 3 days)
+    // Use JWT with minimal data to avoid large cookies
+    strategy: "jwt",
+    maxAge: 12 * 60 * 60, // 12 hours (reduced from 24 hours)
   },
   cookies: {
-    // Configure cookies to be more size-efficient with shorter expiration
     sessionToken: {
       name: `next-auth.session-token`,
       options: {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 24 * 60 * 60, // 1 day in seconds
-      },
-    },
-    // Configure other cookies with minimal options and shorter durations
-    callbackUrl: {
-      name: `next-auth.callback-url`,
-      options: {
-        sameSite: 'lax',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 60 * 60, // 1 hour
-      },
-    },
-    csrfToken: {
-      name: `next-auth.csrf-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 60 * 60, // 1 hour
+        secure: process.env.SECURE_COOKIES !== 'false' && process.env.NODE_ENV === 'production',
+        maxAge: 12 * 60 * 60, // 12 hours in seconds
       },
     },
   },
@@ -227,33 +202,35 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       // Only store essential user data in the token to keep it small
       if (user) {
-        // Minimal data in token
+        // Store only minimal data - just IDs and boolean flags
         token.id = user.id;
         token.isAdmin = !!user.isAdmin;
         token.isPremium = !!user.isPremium;
-        // Don't include name, email, or image in the token
+        
+        // Don't store these in the token to keep it small
+        delete token.name;
+        delete token.email;
+        delete token.picture;
       }
       return token;
     },
     async session({ session, token }) {
       if (token && session.user) {
-        // Keep session data minimal
+        // Set minimal data from token
         session.user.id = token.id as string;
-        session.user.isAdmin = !!token.isAdmin;
-        session.user.isPremium = !!token.isPremium;
+        session.user.isAdmin = token.isAdmin as boolean;
+        session.user.isPremium = token.isPremium as boolean;
         
-        // Load user data from DB when needed instead of storing in session
-        // This will make the session cookie smaller
+        // Load user data from DB only when needed
         try {
-          await connectDB();
-          const user = await User.findById(token.id).select('username email avatar') as MongoDBUser;
+          const user = await User.findById(token.id).select('username email avatar');
           if (user) {
             session.user.name = user.username;
             session.user.email = user.email;
             session.user.image = user.avatar;
           }
         } catch (error) {
-          console.error("Error loading user data for session:", error);
+          console.error("Error loading user data:", error);
         }
       }
       return session;

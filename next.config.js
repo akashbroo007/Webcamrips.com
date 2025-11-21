@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  // Ensure consistent hostname and port
+  hostname: '172.20.10.2',
+  port: 3003,
   images: {
     domains: [
       'localhost',
@@ -10,7 +13,8 @@ const nextConfig = {
       's3.amazonaws.com',
       'placehold.co',
       'ucarecdn.com',
-      'gofile.io'
+      'gofile.io',
+      '172.20.10.2',  // Your actual local IP
     ],
     remotePatterns: [
       {

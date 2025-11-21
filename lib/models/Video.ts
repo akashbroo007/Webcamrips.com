@@ -95,12 +95,39 @@ VideoSchema.virtual('formattedDuration').get(function() {
 
 // Add fileUrl virtual
 VideoSchema.virtual('fileUrl').get(function() {
-  // First check if gofilesUrl exists and is valid
-  if (this.gofilesUrl) {
-    // Process the gofile URL if needed
-    let url = this.gofilesUrl.trim();
+  // Check for mixdrop URL first (prioritize Mixdrop)
+  if (this.mixdropUrl && typeof this.mixdropUrl === 'string') {
+    const mixdropUrl = this.mixdropUrl.trim();
     
     // Add https if missing
+    let url = mixdropUrl;
+    if (!url.startsWith('https://') && !url.startsWith('http://')) {
+      url = 'https://' + url.replace(/^\/\//, '');
+    }
+    
+    // Handle various Mixdrop URL formats
+    if (url.includes('mixdrop.co')) {
+      // Already in embed format
+      if (url.includes('/e/') || url.includes('/f/')) {
+        return url;
+      } else if (url.match(/\/[a-zA-Z0-9]+$/)) {
+        // Convert short URL to embed URL
+        const fileRef = url.match(/\/([a-zA-Z0-9]+)$/)?.[1];
+        if (fileRef) {
+          return `https://mixdrop.co/e/${fileRef}`;
+        }
+      }
+    }
+    
+    return url;
+  }
+  
+  // Fallback to gofilesUrl if mixdropUrl is not available
+  if (this.gofilesUrl && typeof this.gofilesUrl === 'string') {
+    const gofilesUrl = this.gofilesUrl.trim();
+    
+    // Add https if missing
+    let url = gofilesUrl;
     if (!url.startsWith('https://') && !url.startsWith('http://')) {
       url = 'https://' + url.replace(/^\/\//, '');
     }
@@ -123,16 +150,9 @@ VideoSchema.virtual('fileUrl').get(function() {
     return url;
   }
   
-  // Check for mixdrop URL
-  if (this.mixdropUrl) {
-    let url = this.mixdropUrl.trim();
-    
-    // Add https if missing
-    if (!url.startsWith('https://') && !url.startsWith('http://')) {
-      url = 'https://' + url.replace(/^\/\//, '');
-    }
-    
-    return url;
+  // Check for direct file URL
+  if (this.directFileUrl && typeof this.directFileUrl === 'string') {
+    return this.directFileUrl;
   }
   
   // Fallback if no URLs are available

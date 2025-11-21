@@ -13,10 +13,11 @@ declare global {
 
 export class StreamDetectorService {
   private browser: Browser | null = null;
+  private browserInitPromise: Promise<Browser> | null = null;
 
   async initialize() {
-    if (!this.browser) {
-      this.browser = await puppeteer.launch({
+    if (!this.browser && !this.browserInitPromise) {
+      this.browserInitPromise = puppeteer.launch({
         headless: true,
         args: [
           '--no-sandbox',
@@ -28,6 +29,23 @@ export class StreamDetectorService {
           '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         ]
       });
+      
+      try {
+        this.browser = await this.browserInitPromise;
+      } catch (error) {
+        console.error('Failed to initialize browser:', error);
+        this.browserInitPromise = null;
+        throw error;
+      }
+    } else if (this.browserInitPromise && !this.browser) {
+      // Wait for the existing initialization to complete
+      try {
+        this.browser = await this.browserInitPromise;
+      } catch (error) {
+        console.error('Failed to initialize browser:', error);
+        this.browserInitPromise = null;
+        throw error;
+      }
     }
   }
 
@@ -161,8 +179,14 @@ export class StreamDetectorService {
 
   async cleanup() {
     if (this.browser) {
-      await this.browser.close();
-      this.browser = null;
+      try {
+        await this.browser.close();
+      } catch (error) {
+        console.error('Error closing browser:', error);
+      } finally {
+        this.browser = null;
+        this.browserInitPromise = null;
+      }
     }
   }
 } 

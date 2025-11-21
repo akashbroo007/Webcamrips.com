@@ -28,24 +28,40 @@ export async function POST(request: Request) {
       );
     }
 
+    // Validate URL format
+    const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w.-]*)*\/?$/;
+    if (gofilesUrl && !urlRegex.test(gofilesUrl)) {
+      return NextResponse.json(
+        { error: 'Invalid gofilesUrl format' },
+        { status: 400 }
+      );
+    }
+
     // Create new video
     const video = new Video({
-      title,
-      description,
-      gofilesUrl,
-      thumbnail: thumbnailUrl,
+      title: title.trim(),
+      description: description?.trim(),
+      gofilesUrl: gofilesUrl.trim(),
+      thumbnail: thumbnailUrl?.trim(),
       duration: data.duration || 0,
       views: 0,
-      platform
+      platform: platform.trim()
     });
 
-    await video.save();
-
-    return NextResponse.json({ success: true, video });
+    try {
+      await video.save();
+      return NextResponse.json({ success: true, video });
+    } catch (dbError) {
+      console.error('Database error saving video:', dbError);
+      return NextResponse.json(
+        { error: 'Database error saving video', details: dbError instanceof Error ? dbError.message : 'Unknown error' },
+        { status: 500 }
+      );
+    }
   } catch (error) {
     console.error('Error saving video:', error);
     return NextResponse.json(
-      { error: 'Failed to save video' },
+      { error: 'Failed to save video', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }

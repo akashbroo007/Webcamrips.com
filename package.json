@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node scripts/fix-model-exports.js && node scripts/dev-utils.js --fix-images --clear-cache && next dev -p 3002",
+    "dev": "node scripts/fix-model-exports.js && node scripts/dev-utils.js --fix-images --clear-cache && next dev -p 3003 -H 172.20.10.2",
+    "dev:debug": "node scripts/run-dev-debug.js",
     "dev:custom": "node server.js",
     "build": "node scripts/fix-model-exports.js && next build",
     "start": "cross-env NODE_ENV=production node server.js",
     "start:windows": "set NODE_ENV=production& node server.js",
+    "start:ip": "node scripts/start-with-ip.js",
     "test": "npm run build && npm run start:windows",
     "test:db": "node scripts/test-db-connection.js",
     "check:ip": "node scripts/check-ip-access.js",
@@ -17,6 +19,7 @@
     "dev:utils": "node scripts/dev-utils.js",
     "lint": "next lint",
     "create-admin": "ts-node -P tsconfig.scripts.json scripts/create-admin.ts",
+    "test:admin-login": "ts-node -P tsconfig.scripts.json scripts/test-admin-login.ts",
     "recorder": "ts-node -P tsconfig.scripts.json scripts/start-recorder.ts",
     "test-recorder": "ts-node -P tsconfig.scripts.json scripts/test-recorder.ts",
     "test-integration": "ts-node -P tsconfig.scripts.json scripts/test-integration.ts",
@@ -26,9 +29,13 @@
     "test:component": "ts-node -P tsconfig.scripts.json scripts/component-test.ts",
     "test:playwright": "ts-node -P tsconfig.scripts.json scripts/run-playwright-tests.ts",
     "test:file-host": "ts-node -P tsconfig.scripts.json scripts/test-file-host.ts",
+    "test:mixdrop": "ts-node -P tsconfig.scripts.json scripts/test-mixdrop.ts",
     "recorder:start": "ts-node -P tsconfig.scripts.json scripts/start-recorder.ts",
     "test:all": "powershell -ExecutionPolicy Bypass -File .\\scripts\\test-pipeline.ps1",
-    "clean": "rimraf .next && rimraf out"
+    "clean": "rimraf .next && rimraf out",
+    "clear-cookies": "node scripts/clear-cookies.js",
+    "server:ip": "node scripts/run-server-with-ip.js",
+    "test:cookies": "node scripts/test-cookies.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.800.0",

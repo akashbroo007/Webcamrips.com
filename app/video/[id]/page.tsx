@@ -9,6 +9,7 @@ import { FiClock, FiEye, FiCalendar, FiUser, FiThumbsUp, FiThumbsDown, FiShare2,
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import VideoCard from '@/components/video/VideoCard';
+import MixdropPlayer from '@/components/video/MixdropPlayer';
 import HistoryService from '@/lib/services/historyService';
 import Head from 'next/head';
 
@@ -272,7 +273,15 @@ const VideoPage: FC = () => {
             <div className="lg:col-span-2">
               {/* Video Player */}
               <div className="bg-black rounded-lg overflow-hidden relative aspect-video mb-4">
-                {videoData.fileUrl ? (
+                {/* Check for Mixdrop URL first (prioritize Mixdrop) */}
+                {videoData.mixdropUrl ? (
+                  <MixdropPlayer 
+                    url={videoData.mixdropUrl} 
+                    width="100%" 
+                    height="100%" 
+                    className="absolute inset-0"
+                  />
+                ) : videoData.fileUrl ? (
                   <>
                     {/* For Gofile videos with direct file URL from API */}
                     {videoData.directFileUrl ? (

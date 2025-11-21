@@ -10,6 +10,7 @@ import path from 'path';
 import fs from 'fs';
 import { logger } from '../utils/logger';
 import { v4 as uuidv4 } from 'uuid';
+import mongoose from 'mongoose';
 
 interface RecordingOptions {
   streamUrl: string;
@@ -111,10 +112,45 @@ class RecordingService {
 
             // Update with upload results
             if (uploadResults.length > 0) {
-              const successfulUpload = uploadResults.find(r => r.success);
-              if (successfulUpload) {
+              // Find successful uploads for each host
+              const mixdropUpload = uploadResults.find(r => r.success && r.hostName === 'mixdrop');
+              const gofilesUpload = uploadResults.find(r => r.success && r.hostName === 'gofiles');
+              
+              if (mixdropUpload || gofilesUpload) {
                 recording.uploadStatus = 'completed';
-                // TODO: Create Video model reference if needed
+                
+                // Create Video entry in database
+                const Video = (await import('../models/Video')).default;
+                const Performer = (await import('../models/Performer')).default;
+                
+                // Find or create performer
+                let performer = await Performer.findOne({ name: options.modelName });
+                if (!performer) {
+                  performer = new Performer({
+                    name: options.modelName,
+                    platform: options.platform
+                  });
+                  await performer.save();
+                }
+                
+                // Create video entry
+                const video = new Video({
+                  title: `${options.modelName} - ${options.platform} - ${new Date().toISOString().split('T')[0]}`,
+                  description: `Recorded webcam video of ${options.modelName} from ${options.platform}`,
+                  mixdropUrl: mixdropUpload?.url || null,
+                  gofilesUrl: gofilesUpload?.url || null,
+                  duration: Math.floor((recording.endTime.getTime() - recording.startTime.getTime()) / 1000),
+                  performer: performer._id,
+                  platform: options.platform,
+                  contentId: gofilesUpload?.fileId || mixdropUpload?.fileId || null,
+                  tags: [options.platform, 'webcam', 'recording']
+                });
+                
+                await video.save();
+                
+                // Link recording to video - use string representation to avoid type issues
+                recording.videoId = video._id as any;
+                logger.info(`Created video entry: ${video._id} for recording ${recording._id}`);
               } else {
                 recording.uploadStatus = 'failed';
                 recording.error = 'Failed to upload to any hosting service';
@@ -259,10 +295,47 @@ class RecordingService {
             
             // Update with upload results
             if (uploadResults.length > 0) {
-              const successfulUpload = uploadResults.find(r => r.success);
-              if (successfulUpload) {
+              // Find successful uploads for each host
+              const mixdropUpload = uploadResults.find(r => r.success && r.hostName === 'mixdrop');
+              const gofilesUpload = uploadResults.find(r => r.success && r.hostName === 'gofiles');
+              
+              if (mixdropUpload || gofilesUpload) {
                 recording.uploadStatus = 'completed';
-                // TODO: Create Video model reference if needed
+                
+                // Create Video entry in database
+                const Video = (await import('../models/Video')).default;
+                const Performer = (await import('../models/Performer')).default;
+                
+                // Find or create performer
+                let performer = await Performer.findOne({ name: recording.modelName });
+                if (!performer) {
+                  performer = new Performer({
+                    name: recording.modelName,
+                    platform: recording.platform
+                  });
+                  await performer.save();
+                }
+                
+                // Create video entry
+                const video = new Video({
+                  title: `${recording.modelName} - ${recording.platform} - ${new Date().toISOString().split('T')[0]}`,
+                  description: `Recorded webcam video of ${recording.modelName} from ${recording.platform}`,
+                  mixdropUrl: mixdropUpload?.url || null,
+                  gofilesUrl: gofilesUpload?.url || null,
+                  duration: recording.endTime 
+                    ? Math.floor((recording.endTime.getTime() - recording.startTime.getTime()) / 1000)
+                    : recording.duration || 0,
+                  performer: performer._id,
+                  platform: recording.platform,
+                  contentId: gofilesUpload?.fileId || mixdropUpload?.fileId || null,
+                  tags: [recording.platform, 'webcam', 'recording']
+                });
+                
+                await video.save();
+                
+                // Link recording to video
+                recording.videoId = video._id as any;
+                logger.info(`Created video entry: ${video._id} for recording ${recording._id}`);
               } else {
                 recording.uploadStatus = 'failed';
                 recording.error = 'Failed to upload to any hosting service';

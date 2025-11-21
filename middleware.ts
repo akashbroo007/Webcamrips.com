@@ -60,14 +60,25 @@ export async function middleware(request: NextRequest) {
 
   // Get the token from the session
   try {
-    // First check database connection for all routes
-    if (!pathname.startsWith('/api/')) {
-      const dbCheckResponse = await fetch(new URL('/api/check-db-status', request.url));
-      if (!dbCheckResponse.ok) {
-        // If not a static asset, redirect to database error page
-        if (!pathname.includes('.')) {
+    // First check database connection for non-API routes and non-static assets
+    if (!pathname.startsWith('/api/') && !pathname.includes('.')) {
+      try {
+        // Use a timeout to prevent hanging on DB check
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2000);
+        
+        const dbCheckResponse = await fetch(new URL('/api/check-db-status', request.url), {
+          signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (!dbCheckResponse.ok) {
           return NextResponse.redirect(new URL('/database-error', request.url));
         }
+      } catch (dbError) {
+        console.error('Database check error in middleware:', dbError);
+        return NextResponse.redirect(new URL('/database-error', request.url));
       }
     }
 

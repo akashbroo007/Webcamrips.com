@@ -6,9 +6,10 @@ import './models/preload-models';
 // Apply TLS patch for Node.js to fix SSL issues with MongoDB Atlas
 try {
   // Only apply in development environment to avoid security risks in production
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== 'production' && process.env.MONGODB_TLS_INSECURE === 'true') {
     // @ts-ignore - This is a low-level patch to fix TLS issues
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+    console.warn('Warning: Running with insecure TLS settings. Not recommended for production.');
   }
 } catch (error) {
   console.warn('Could not apply TLS patch:', error);
@@ -51,6 +52,11 @@ if (!global.mongooseMain) {
 
 // Use environment variable for max connection attempts
 const MAX_CONNECTION_ATTEMPTS = DB_RETRY_ATTEMPTS;
+
+// Export a function to check if we're in mock mode
+export const isInMockMode = () => {
+  return isMockMode;
+};
 
 async function connectDB() {
   // If mock mode is explicitly enabled, just use that
@@ -177,11 +183,6 @@ async function connectDB() {
 }
 
 export default connectDB;
-
-// Export a function to check if we're in mock mode
-export function isInMockMode() {
-  return isMockMode;
-}
 
 export async function disconnectDB() {
   if (!cached.conn) {

@@ -7,64 +7,77 @@ import { logger } from '../lib/utils/logger';
 // Load environment variables
 dotenv.config({ path: '.env.local' });
 
-async function main() {
+/**
+ * Test script to verify file hosting service uploads
+ */
+async function testFileHosting() {
   try {
-    // Configure file host services
-    fileHostService.setMixdropConfig({
-      email: process.env.MIXDROP_EMAIL,
-      apiKey: process.env.MIXDROP_API_KEY
-    });
-
-    fileHostService.setGofilesConfig({
-      token: process.env.GOFILES_TOKEN
-    });
-
-    // Create a test file
-    const testFilePath = path.join(process.cwd(), 'temp', 'test.txt');
-    const testContent = 'This is a test file for upload ' + new Date().toISOString();
-
-    // Ensure temp directory exists
-    if (!fs.existsSync(path.join(process.cwd(), 'temp'))) {
-      fs.mkdirSync(path.join(process.cwd(), 'temp'));
-    }
-
-    // Write test file
-    fs.writeFileSync(testFilePath, testContent);
-    logger.info('Created test file:', testFilePath);
-
-    // Test upload to multiple hosts
-    logger.info('\nTesting upload to multiple hosts...');
-    const results = await fileHostService.uploadToMultipleHosts(testFilePath);
-    logger.info('Upload results:', results);
-
-    // Clean up test file
-    fs.unlinkSync(testFilePath);
-    logger.info('\nTest file cleaned up');
-
-    // Summary
-    logger.info('\nTest Summary:');
+    // Check if credentials are configured
+    const mixdropEmail = process.env.MIXDROP_EMAIL;
+    const mixdropApiKey = process.env.MIXDROP_API_KEY;
+    const gofilesToken = process.env.GOFILES_TOKEN;
     
-    // Find results by host
-    const mixdropResult = results.find(r => r.hostName === 'mixdrop');
-    const gofilesResult = results.find(r => r.hostName === 'gofiles');
+    console.log('File Host Test Configuration:');
+    console.log(`Mixdrop Email: ${mixdropEmail ? '✓ Configured' : '✗ Missing'}`);
+    console.log(`Mixdrop API Key: ${mixdropApiKey ? '✓ Configured' : '✗ Missing'}`);
+    console.log(`Gofiles Token: ${gofilesToken ? '✓ Configured' : '✗ Missing'}`);
     
-    if (mixdropResult) {
-      logger.info('Mixdrop:', mixdropResult.success ? 'Success' : 'Failed', mixdropResult.url || mixdropResult.error);
+    // Create a test file if it doesn't exist
+    const testDir = path.join(process.cwd(), 'temp');
+    if (!fs.existsSync(testDir)) {
+      fs.mkdirSync(testDir, { recursive: true });
     }
     
-    if (gofilesResult) {
-      logger.info('Gofiles:', gofilesResult.success ? 'Success' : 'Failed', gofilesResult.url || gofilesResult.error);
+    const testFilePath = path.join(testDir, 'test-upload.mp4');
+    
+    // Create a small test file if it doesn't exist
+    if (!fs.existsSync(testFilePath)) {
+      console.log('Creating test file...');
+      // Create a 1MB test file
+      const buffer = Buffer.alloc(1024 * 1024, 'x');
+      fs.writeFileSync(testFilePath, buffer);
     }
     
-    logger.info('Multiple:', results.filter(r => r.success).length + '/' + results.length, 'successful uploads');
-
+    console.log(`Test file: ${testFilePath}`);
+    
+    // Test upload to both services
+    console.log('\nTesting uploads...');
+    console.log('1. Testing Mixdrop upload...');
+    
+    try {
+      const mixdropResult = await fileHostService['uploadToMixdrop'](testFilePath);
+      console.log('Mixdrop upload result:', mixdropResult);
+    } catch (error) {
+      console.error('Mixdrop upload error:', error);
+    }
+    
+    console.log('\n2. Testing Gofiles upload...');
+    
+    try {
+      const gofilesResult = await fileHostService['uploadToGofiles'](testFilePath);
+      console.log('Gofiles upload result:', gofilesResult);
+    } catch (error) {
+      console.error('Gofiles upload error:', error);
+    }
+    
+    console.log('\n3. Testing uploadToMultipleHosts (should try Mixdrop first)...');
+    
+    try {
+      const results = await fileHostService.uploadToMultipleHosts(testFilePath);
+      console.log('Upload results:', results);
+    } catch (error) {
+      console.error('Multiple hosts upload error:', error);
+    }
+    
+    console.log('\nFile hosting tests completed.');
   } catch (error) {
-    logger.error('Test failed:', error);
+    console.error('Test failed:', error);
+    process.exit(1);
   }
 }
 
 // Run the test
-main().catch(error => {
-  logger.error('Fatal error:', error);
+testFileHosting().catch(err => {
+  console.error('Unhandled error:', err);
   process.exit(1);
 }); 
